@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: node_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: "postgresql://spotmetrics:spotmetrics-futbol@localhost:5432/futbol?schema=public"
+    volumes:
+      - .:/usr/src/app
+
+  postgres:
+    container_name: postgres_db
+    image: postgres:17
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: spotmetrics
+      POSTGRES_PASSWORD: spotmetrics-futbol
+      POSTGRES_DB: futbol

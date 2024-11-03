@@ -1,0 +1,31 @@
+{
+	"name": "spotmetrics",
+	"version": "1.0.0",
+	"description": "Este projeto é uma API backend construída com NodeJS e PostgreSQL, utilizando Prisma como ORM. A aplicação inclui um CRUD para gerenciar jogadores de futebol, com funcionalidades extras como ranqueamento e divisão de equipes.",
+	"main": "index.js",
+	"scripts": {
+		"start": "ts-node-dev src/server.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@prisma/client": "^5.21.1",
+		"dotenv": "^16.4.5",
+		"express": "^4.21.1",
+		"swagger-jsdoc": "^6.2.8",
+		"swagger-ui-express": "^5.0.1",
+		"ts-node-dev": "^2.0.0",
+		"zod": "^3.23.8"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/express": "^5.0.0",
+		"@types/node": "^22.8.6",
+		"@types/swagger-jsdoc": "^6.0.4",
+		"@types/swagger-ui-express": "^4.1.7",
+		"prisma": "^5.21.1",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.6.3"
+	}
+}
