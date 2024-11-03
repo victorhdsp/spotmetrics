@@ -11,7 +11,7 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: "postgresql://spotmetrics:spotmetrics-futbol@localhost:5432/futbol?schema=public"
+      DATABASE_URL: "postgresql://spotmetrics:spotmetrics-futbol@postgres:5432/futbol?schema=public"
     volumes:
       - .:/usr/src/app
 
