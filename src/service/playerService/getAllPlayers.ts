@@ -1,16 +1,33 @@
 import playerModel from "../../model/playerModel";
-import { AllPlayersParams } from "../../model/playerModel/getAllPlayers";
-import { PlayerResumed } from "../../utils/types";
+import type { AllPlayersParams } from "../../model/playerModel/getAllPlayers";
+import type { PlayerResumed } from "../../utils/types/player";
 
-type Output = Promise<PlayerResumed[]>;
+type Output = Promise<{
+	players: PlayerResumed[]
+	total: number
+}>;
 
 async function getAllPlayers(params: AllPlayersParams): Output {
-    try {
-        return playerModel.getAll(params);
-    } catch (error) {
-        const err: Error = error as any;
-        throw new Error(err.message);
-    }
+	try {
+		const response = await playerModel.getAll(params);
+		const players: PlayerResumed[] = response.map((player) => {
+			const resolvedPlayer: PlayerResumed = {
+				id: player.id,
+				name: player.name,
+				username: player.username,
+				createdAt: player.createdAt,
+			};
+			return resolvedPlayer;
+		});
+		const total = await playerModel.countAll(params);
+		return {
+			players,
+			total,
+		};
+	} catch (error) {
+		const err: Error = error as any;
+		throw new Error(err.message);
+	}
 }
 
 export default getAllPlayers;
