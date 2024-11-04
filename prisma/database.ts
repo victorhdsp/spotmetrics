@@ -2,13 +2,16 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function main() {}
+export async function innitialize() {
+	// Start prisma
+}
 
-main()
+innitialize()
 	.then(async () => {
 		await prisma.$disconnect();
 	})
 	.catch(async (e) => {
+		// biome-ignore lint/suspicious/noConsole: <explanation>
 		console.error(e);
 		await prisma.$disconnect();
 		process.exit(1);
