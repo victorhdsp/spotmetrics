@@ -4,7 +4,8 @@
 	"description": "Este projeto é uma API backend construída com NodeJS e PostgreSQL, utilizando Prisma como ORM. A aplicação inclui um CRUD para gerenciar jogadores de futebol, com funcionalidades extras como ranqueamento e divisão de equipes.",
 	"main": "index.js",
 	"scripts": {
-		"start": "ts-node-dev src/server.ts"
+		"start": "ts-node-dev src/server.ts",
+		"test": "jest"
 	},
 	"keywords": [],
 	"author": "",
@@ -13,6 +14,8 @@
 		"@prisma/client": "^5.21.1",
 		"dotenv": "^16.4.5",
 		"express": "^4.21.1",
+		"express-async-handler": "^1.2.0",
+		"supertest": "^7.0.0",
 		"swagger-jsdoc": "^6.2.8",
 		"swagger-ui-express": "^5.0.1",
 		"ts-node-dev": "^2.0.0",
@@ -20,11 +23,16 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
+		"@jest/globals": "^29.7.0",
 		"@types/express": "^5.0.0",
 		"@types/node": "^22.8.6",
+		"@types/supertest": "^6.0.2",
 		"@types/swagger-jsdoc": "^6.0.4",
 		"@types/swagger-ui-express": "^4.1.7",
+		"jest": "^29.7.0",
+		"jest-mock-extended": "^4.0.0-beta1",
 		"prisma": "^5.21.1",
+		"ts-jest": "^29.2.5",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.6.3"
 	}
