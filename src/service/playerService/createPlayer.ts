@@ -1,35 +1,34 @@
-import { PlayerComplete, PlayerCreateInput, Skill } from "../../utils/types";
-import { PlayerCreateSchema } from "../../utils/schemas";
+import { randomUUID } from "node:crypto";
 import playerModel from "../../model/playerModel";
-import { randomUUID } from "crypto";
+import type {
+	PlayerComplete,
+	PlayerCreateInput
+} from "../../utils/types/player";
+import { PlayerCreateSchema } from "../../utils/zod/schemas";
+import { zParse } from "../../utils/zod/zParse";
 
 type Data = PlayerCreateInput;
 type Output = Promise<PlayerComplete>;
 
 async function createPlayer(data: Data): Output {
-    try {
-        const resolvedData = PlayerCreateSchema.parse(data);
-        const prisma = await playerModel.create({
-            id: randomUUID(),
-            createdAt: resolvedData.createdAt || new Date(),
-            ...resolvedData
-        });
-        const player: PlayerComplete = {
-            id: prisma.id,
-            name: prisma.name,
-            username: prisma.username,
-            createdAt: prisma.createdAt,
-            skills: {
-                dribble: prisma.skills.dribble,
-                power: prisma.skills.power,
-                speed: prisma.skills.speed,
-            }
-        };
-        return player;
-    } catch (error) {
-        const err: Error = error as any;
-        throw new Error(err.message);
-    }
+	const resolvedData = await zParse(PlayerCreateSchema, data);
+	const prisma = await playerModel.create({
+		id: randomUUID(),
+		createdAt: resolvedData.createdAt || new Date(),
+		...resolvedData,
+	});
+	const player: PlayerComplete = {
+		id: prisma.id,
+		name: prisma.name,
+		username: prisma.username,
+		createdAt: prisma.createdAt,
+		skills: {
+			dribble: prisma.skills.dribble,
+			power: prisma.skills.power,
+			speed: prisma.skills.speed,
+		},
+	};
+	return player;
 }
 
 export default createPlayer;
