@@ -13,6 +13,14 @@ routes.get(
 );
 
 routes.get(
+	"/ranking",
+	asyncHandler(async (req: Request, res: Response) => {
+		const result = await playerController.getRanking();
+		res.status(200).json(result);
+	}),
+);
+
+routes.get(
 	"/:id",
 	asyncHandler(async (req: Request, res: Response) => {
 		const result = await playerController.get(req);

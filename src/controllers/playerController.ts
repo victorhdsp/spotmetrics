@@ -48,6 +48,10 @@ async function getAllPlayers(req: Request): Promise<OutputGetAllPlayers> {
 		prev: params.size && params.page > 0 ? prev : null,
 	};
 }
+async function getRankingPlayers(): Promise<PlayerComplete[]> {
+	const players = await playerService.getRanking();
+	return players;
+}
 
 const playerController = {
 	create: createPlayer,
@@ -55,5 +59,6 @@ const playerController = {
 	change: changePlayer,
 	get: getUniquePlayer,
 	getAll: getAllPlayers,
+	getRanking: getRankingPlayers,
 };
 export default playerController;

@@ -8,26 +8,21 @@ type Output = Promise<{
 }>;
 
 async function getAllPlayers(params: AllPlayersParams): Output {
-	try {
-		const response = await playerModel.getAll(params);
-		const players: PlayerResumed[] = response.map((player) => {
-			const resolvedPlayer: PlayerResumed = {
-				id: player.id,
-				name: player.name,
-				username: player.username,
-				createdAt: player.createdAt,
-			};
-			return resolvedPlayer;
-		});
-		const total = await playerModel.countAll(params);
-		return {
-			players,
-			total,
+	const response = await playerModel.getAll(params);
+	const players: PlayerResumed[] = response.map((player) => {
+		const resolvedPlayer: PlayerResumed = {
+			id: player.id,
+			name: player.name,
+			username: player.username,
+			createdAt: player.createdAt,
 		};
-	} catch (error) {
-		const err: Error = error as any;
-		throw new Error(err.message);
-	}
+		return resolvedPlayer;
+	});
+	const total = await playerModel.countAll(params);
+	return {
+		players,
+		total,
+	};
 }
 
 export default getAllPlayers;

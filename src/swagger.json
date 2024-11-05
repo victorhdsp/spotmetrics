@@ -11,7 +11,7 @@
 		"version": "1.0.0"
 	},
 	"paths": {
-		"/v1/players/": {
+		"/v1/players": {
 			"post": {
 				"summary": "Cadastrar jogador",
 				"description": "Essa rota é responsável por cadastrar um jogador no banco de dados.",
@@ -249,6 +249,28 @@
 								},
 								"example": {
 									"message": "Jogador não encontrado"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/players/ranking": {
+			"get": {
+				"summary": "Ranquea jogadores por habilidade",
+				"description": "Essa rota é responsável por ranquear os jogadores cadastrados no banco de dados em ordem do maior para o menor.",
+				"tags": ["Players"],
+				"responses": {
+					"200": {
+						"description": "ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/PlayerCompleteOutput"
+									}
 								}
 							}
 						}
