@@ -21,7 +21,6 @@ describe("<post> na API de /players", () => {
 		expect(response.body.skills.speed).toEqual(data.skills.speed);
 		expect(response.body.skills.dribble).toEqual(data.skills.dribble);
 	});
-
 	test("somente as informações mandatórias, deve retornar um jogador", async () => {
 		const data = {
 			name: "ciclano",
@@ -50,7 +49,6 @@ describe("<post> na API de /players", () => {
 		expect(response.status).toEqual(500);
 		expect(response.body.message).toEqual("O nome do jogador é obrigatório");
 	});
-
 	test("faltando as habilidades, deve retornar uma mensagem de erro", async () => {
 		const data = {
 			name: "fulano",
