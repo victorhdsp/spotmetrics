@@ -113,7 +113,7 @@
 				}
 			}
 		},
-		"/v1/players/:id": {
+		"/v1/players/{id}": {
 			"put": {
 				"summary": "Modificar um jogador",
 				"description": "Essa rota é responsável por atualizar um jogador no banco de dados.",
