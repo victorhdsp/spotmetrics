@@ -2,9 +2,9 @@ import { type Request, type Response, Router } from "express";
 import asyncHandler from "express-async-handler";
 import playerController from "../controllers/playerController";
 
-const route = Router();
+const routes = Router();
 
-route.get(
+routes.get(
 	"/",
 	asyncHandler(async (req: Request, res: Response) => {
 		const result = await playerController.getAll(req);
@@ -12,7 +12,7 @@ route.get(
 	}),
 );
 
-route.get(
+routes.get(
 	"/:id",
 	asyncHandler(async (req: Request, res: Response) => {
 		const result = await playerController.get(req);
@@ -20,7 +20,7 @@ route.get(
 	}),
 );
 
-route.post(
+routes.post(
 	"/",
 	asyncHandler(async (req: Request, res: Response) => {
 		const result = await playerController.create(req);
@@ -28,7 +28,7 @@ route.post(
 	}),
 );
 
-route.delete(
+routes.delete(
 	"/:id",
 	asyncHandler(async (req: Request, res: Response) => {
 		await playerController.delete(req);
@@ -36,7 +36,7 @@ route.delete(
 	}),
 );
 
-route.put(
+routes.put(
 	"/:id",
 	asyncHandler(async (req: Request, res: Response) => {
 		const result = await playerController.change(req);
@@ -44,4 +44,4 @@ route.put(
 	}),
 );
 
-export default route;
+export default routes;
