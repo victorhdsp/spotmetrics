@@ -27,7 +27,7 @@ model Skill {
   power       Int    @default(0)
   speed       Int    @default(0)
   dribble     Int?
-  playerId    String
+  playerId    String  @unique
 
   Player Player?
 }
