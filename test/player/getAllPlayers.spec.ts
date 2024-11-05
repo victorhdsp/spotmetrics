@@ -11,25 +11,56 @@ const data = {
     }
 }
 
+const data2 = {
+    ...data,
+    username: "ciclano123"
+}
+
 describe("<get> na API de /players/", () => {
     test("Sem players, deve retornar uma lista vazia", async () => {
         const response = await api.get("/v1/players");
         expect(response.status).toEqual(200);
         expect(response.body.next).toEqual(null);
         expect(response.body.players).toEqual([]);
-        expect(response.body.prev).toEqual("http://localhost:3000/v1/players?limit=10&offset=0");
+        expect(response.body.prev).toEqual(null);
         expect(response.body.total).toEqual(0);
     });
     test("Com players, deve retornar uma lista de players", async () => {
-        const player: PlayerComplete = (await api.post("/v1/players").send(data)).body;
+        await api.post("/v1/players").send(data);
         const response = await api.get("/v1/players");
+        expect(response.status).toEqual(200);
+        expect(response.body.players.length).toBeGreaterThanOrEqual(1)
+    });
+    test("Com players e limite, deve retornar uma lista de players limitada", async () => {
+        const player: PlayerComplete = (await api.post("/v1/players").send(data)).body;
+        (await api.post("/v1/players").send(data)).body;
+        const response = await api.get("/v1/players?limit=1");
         expect(response.status).toEqual(200);
         expect(response.body.players).toHaveLength(1);
         expect(response.body.players[0].name).toEqual(player.name);
     });
-    test.todo("Com players e limite, deve retornar uma lista de players limitada");
-    test.todo("Buscar por nome completo, deve retornar uma lista de players filtrada");
-    test.todo("Buscar por nome parcial, deve retornar uma lista de players filtrada");
-    test.todo("Buscar por apelido completo, deve retornar uma lista de players filtrada");
-    test.todo("Buscar por apelido parcial, deve retornar uma lista de players filtrada");
+    test("Buscar por nome completo, deve retornar uma lista de players filtrada", async () => {
+        const player: PlayerComplete = (await api.post("/v1/players").send(data)).body;
+        const response = await api.get(`/v1/players?name=${data.name}`);
+        expect(response.status).toEqual(200);
+        expect(response.body.players[0].name).toEqual(player.name);
+    });
+    test("Buscar por nome parcial, deve retornar uma lista de players filtrada", async () => {
+        const player: PlayerComplete = (await api.post("/v1/players").send(data)).body;
+        const response = await api.get(`/v1/players?name=${data.name.slice(0, 3)}`);
+        expect(response.status).toEqual(200);
+        expect(response.body.players[0].name).toEqual(player.name);
+    });
+    test("Buscar por apelido completo, deve retornar uma lista de players filtrada", async () => {
+        const player: PlayerComplete = (await api.post("/v1/players").send(data2)).body;
+        const response = await api.get(`/v1/players?username=${data2.username}`);
+        expect(response.status).toEqual(200);
+        expect(response.body.players[0].username).toEqual(player.username);
+    });
+    test("Buscar por apelido parcial, deve retornar uma lista de players filtrada", async () => {
+        const player: PlayerComplete = (await api.post("/v1/players").send(data2)).body;
+        const response = await api.get(`/v1/players?username=${data2.username.slice(0, 3)}`);
+        expect(response.status).toEqual(200);
+        expect(response.body.players[0].username).toEqual(player.username);
+    });
 });

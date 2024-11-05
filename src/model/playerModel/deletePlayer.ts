@@ -6,7 +6,7 @@ async function deletePlayer(id: string): Output {
 	const player = await prisma.player.delete({
 		where: {
 			id: id,
-		},
+		}
 	});
 	return !!player;
 }

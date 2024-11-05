@@ -8,9 +8,9 @@ type Data = PlayerChangeInput;
 type Output = Promise<PlayerComplete>;
 
 async function changePlayer(id: string, data: Data): Output {
-	const exist = await playerModel.get(id);
-	if (!exist) throw new notFoundError("Jogador não encontrado");
 	const resolvedData = await zParse(PlayerChangeSchema, data);
+	const playerExist = await playerModel.get(id);
+	if (!playerExist) throw new notFoundError("Jogador não encontrado");
 	const prisma = await playerModel.change(id, resolvedData);
 	if (!prisma) throw new Error("Ocorrou um erro inesperado");
 	const player: PlayerComplete = {

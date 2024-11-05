@@ -44,8 +44,8 @@ async function getAllPlayers(req: Request): Promise<OutputGetAllPlayers> {
 	return {
 		players,
 		total,
-		next: params.page * size < total ? next : null,
-		prev: params.page > 0 ? prev : null,
+		next: params.size && params.page * size < total ? next : null,
+		prev: params.size && params.page > 0 ? prev : null,
 	};
 }
 

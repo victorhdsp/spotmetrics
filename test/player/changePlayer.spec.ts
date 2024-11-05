@@ -12,7 +12,7 @@ const data = {
 }
 
 describe("<put> na API de /players/:id", () => {
-    test("com um id válido em campo mandatório, deve retornar um jogador", async () => {
+    test("com um id válido e modificando campo mandatório, deve retornar um jogador", async () => {
         const player: PlayerComplete = (await api.post("/v1/players").send(data)).body;
         expect(player.name).toEqual(data.name);
         const response = await api.put(`/v1/players/${player.id}`).send({ name: "fulano" });
@@ -20,7 +20,7 @@ describe("<put> na API de /players/:id", () => {
         expect(response.body.name).toEqual("fulano");
     });
 
-    test("com um id válido em campo opcional, deve retornar um jogador", async () => {
+    test("com um id válido e modificando campo opcional, deve retornar um jogador", async () => {
         const player: PlayerComplete = (await api.post("/v1/players").send(data)).body;
         expect(player.name).toEqual(data.name);
         const response = await api.put(`/v1/players/${player.id}`).send({ username: "fulano x" });
@@ -28,7 +28,7 @@ describe("<put> na API de /players/:id", () => {
         expect(response.body.username).toEqual("fulano x");
     });
 
-    test("com um id válido em habilidades, deve retornar um jogador", async () => {
+    test("com um id válido e modificando habilidades, deve retornar um jogador", async () => {
         const player: PlayerComplete = (await api.post("/v1/players").send(data)).body;
         expect(player.name).toEqual(data.name);
         const response = await api.put(`/v1/players/${player.id}`).send({ skills: { power: 10 } });

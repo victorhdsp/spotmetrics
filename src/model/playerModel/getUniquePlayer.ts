@@ -8,6 +8,7 @@ type Output = Prisma.Prisma__PlayerClient<
 		name: string;
 		username: string | null;
 		createdAt: Date;
+		skillId: string;
 		skills: {
 			id: string;
 			power: number;
@@ -31,6 +32,7 @@ function getUniquePlayer(id: string): Output {
 			username: true,
 			createdAt: true,
 			skills: true,
+			skillId: true,
 		},
 	});
 	return player;

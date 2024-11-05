@@ -1,14 +1,8 @@
 import type { Prisma } from "@prisma/client";
 import prisma from "../../../prisma/database";
+import type { AllPlayersParams } from "./getAllPlayers";
 
 type Output = Prisma.PrismaPromise<number>;
-
-export type AllPlayersParams = {
-	name: string;
-	username: string;
-	size: number;
-	page: number;
-};
 
 function countAllPlayers(params: AllPlayersParams): Output {
 	const { name, username } = params;

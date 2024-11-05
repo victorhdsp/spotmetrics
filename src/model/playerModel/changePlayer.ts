@@ -29,7 +29,6 @@ function changePlayer(id: string, data: Data): Output {
 				id,
 			},
 			data: {
-				id: data?.id,
 				name: data?.name,
 				username: data?.username,
 				createdAt: data?.createdAt,
