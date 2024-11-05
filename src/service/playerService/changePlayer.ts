@@ -1,6 +1,9 @@
 import notFoundError from "../../errors/notFound";
 import playerModel from "../../model/playerModel";
-import type { PlayerChangeInput, PlayerComplete } from "../../utils/types/player";
+import type {
+	PlayerChangeInput,
+	PlayerComplete,
+} from "../../utils/types/player";
 import { PlayerChangeSchema } from "../../utils/zod/schemas";
 import { zParse } from "../../utils/zod/zParse";
 

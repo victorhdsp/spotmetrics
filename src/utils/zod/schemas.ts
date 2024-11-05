@@ -16,7 +16,7 @@ function skillPowerDefault(name: string) {
 }
 
 const name = z.string({
-	message: "O nome do jogador é obrigatório"
+	message: "O nome do jogador é obrigatório",
 });
 const username = z.string().nullable().optional();
 const createdAt = z.date().optional();
@@ -24,13 +24,16 @@ const dribble = skillPowerDefault("Drible").nullable().optional();
 const power = skillPowerDefault("Força");
 const speed = skillPowerDefault("Velocidade");
 
-const SkillCreateSchema =  z.object({
-	power,
-	speed,
-	dribble,
-}, {
-	message: "Você precisa passar as habilidades do jogador"
-}) satisfies z.ZodType<Skill>
+const SkillCreateSchema = z.object(
+	{
+		power,
+		speed,
+		dribble,
+	},
+	{
+		message: "Você precisa passar as habilidades do jogador",
+	},
+) satisfies z.ZodType<Skill>;
 
 export const PlayerCreateSchema = z.object({
 	name,
@@ -39,13 +42,16 @@ export const PlayerCreateSchema = z.object({
 	skills: SkillCreateSchema,
 }) satisfies z.ZodType<PlayerCreateInput>;
 
-const SkillChangeSchema = z.object({
-	power: power.optional(),
-	speed: speed.optional(),
-	dribble: dribble.optional(),
-}, {
-	message: "Você precisa passar as habilidades do jogador"
-}) satisfies z.ZodType<PartialSkill>
+const SkillChangeSchema = z.object(
+	{
+		power: power.optional(),
+		speed: speed.optional(),
+		dribble: dribble.optional(),
+	},
+	{
+		message: "Você precisa passar as habilidades do jogador",
+	},
+) satisfies z.ZodType<PartialSkill>;
 
 export const PlayerChangeSchema = z.object({
 	name: name.optional(),

@@ -11,6 +11,6 @@ const playerModel = {
 	change: changePlayer,
 	get: getUniquePlayer,
 	getAll: getAllPlayers,
-	countAll: countAllPlayers
+	countAll: countAllPlayers,
 };
 export default playerModel;

@@ -38,7 +38,7 @@ function changePlayer(id: string, data: Data): Output {
 						speed: data?.skills?.speed,
 						dribble: data?.skills?.dribble,
 					},
-				}
+				},
 			},
 			select: {
 				id: true,

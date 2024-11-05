@@ -1,4 +1,3 @@
-
 import deleteSkill from "./deleteSkill";
 
 const playerSkill = {

@@ -32,10 +32,10 @@ interface OutputGetAllPlayers {
 }
 async function getAllPlayers(req: Request): Promise<OutputGetAllPlayers> {
 	const params: AllPlayersParams = {
-		name: req.query.name ?`${req.query.name}` : undefined,
+		name: req.query.name ? `${req.query.name}` : undefined,
 		username: req.query.username ? `${req.query.username}` : undefined,
 		size: req.query.limit ? Number(`${req.query.limit}`) : undefined,
-		page: Number(`${req.query.offset || 1}`) ,
+		page: Number(`${req.query.offset || 1}`),
 	};
 	const { players, total } = await playerService.getAll(params);
 	const next = `/v1/players?limit=${params.size}&offset=${params.page + 1}`;

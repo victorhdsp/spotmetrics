@@ -19,7 +19,7 @@ export type AllPlayersParams = {
 
 function getAllPlayers(params: AllPlayersParams): Output {
 	const { name, username, size, page } = params;
-	const skip = size && page ? size * (page - 1): undefined;
+	const skip = size && page ? size * (page - 1) : undefined;
 	const players = prisma.player.findMany({
 		where: {
 			name: {

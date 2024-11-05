@@ -3,8 +3,8 @@ import type { AllPlayersParams } from "../../model/playerModel/getAllPlayers";
 import type { PlayerResumed } from "../../utils/types/player";
 
 type Output = Promise<{
-	players: PlayerResumed[]
-	total: number
+	players: PlayerResumed[];
+	total: number;
 }>;
 
 async function getAllPlayers(params: AllPlayersParams): Output {

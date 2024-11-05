@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import playerModel from "../../model/playerModel";
 import type {
 	PlayerComplete,
-	PlayerCreateInput
+	PlayerCreateInput,
 } from "../../utils/types/player";
 import { PlayerCreateSchema } from "../../utils/zod/schemas";
 import { zParse } from "../../utils/zod/zParse";

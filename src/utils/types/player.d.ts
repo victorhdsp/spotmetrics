@@ -2,7 +2,7 @@ import type { Player as OPlayer, Skill as OSkill } from "@prisma/client";
 import { z } from "zod";
 
 interface ISkill extends Pick<OSkill, "power" | "speed" | "dribble"> {
-	dribble?: number | null
+	dribble?: number | null;
 }
 export type Skill = ISkill;
 export type PartialSkill = Parcial<Skill>;

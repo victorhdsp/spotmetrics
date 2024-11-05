@@ -10,13 +10,10 @@ dotenv.config();
 const PORT = 3000;
 
 innitialize().then(() => {
-    const app = express();
-    app.use(express.json());
-    startSwagger(app, PORT);
-    app.use(routes);
-    app.use(errorMiddleware);
-    return app.listen(PORT, () => `server running on port ${PORT}`);
-})
-
-
-
+	const app = express();
+	app.use(express.json());
+	startSwagger(app, PORT);
+	app.use(routes);
+	app.use(errorMiddleware);
+	return app.listen(PORT, () => `server running on port ${PORT}`);
+});
