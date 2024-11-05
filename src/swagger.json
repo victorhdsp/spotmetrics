@@ -1,422 +1,422 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "SpotMetrics football",
-        "description": "API de jogadores de football, nela você pode cadastrar, listar, atualizar, deletar jogadores, montar times e visualizar estatísticas.",
-        "contact": {
-            "name": "Victor Hugo",
-            "email": "victorhugods.pereira@gmail.com",
-            "url": "https://www.linkedin.com/in/victorhdsp/"
-        },
-        "version": "1.0.0"
-    },
-    "paths": {
-        "/v1/players/": {
-            "post": {
-                "summary": "Cadastrar jogador",
-                "description": "Essa rota é responsável por cadastrar um jogador no banco de dados.",
-                "tags": [ "Players" ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/PlayerCreateInput"
-                            },
-                            "example": {
-                                "name": "Victor",
-                                "username": "lkt",
-                                "skills": {
-                                    "power": 6,
-                                    "speed": 5,
-                                    "dribble": 2
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PlayerCompleteOutput"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Deve retornar que está faltando alguma informação no corpo da requisição",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorOutput"
-                                },
-                                "example": {
-                                    "message": "O nome do jogador é obrigatório"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "get": {
-                "summary": "Listar jogadores",
-                "description": "Essa rota é responsável por listar todos os jogadores cadastrados no banco de dados.",
-                "tags": [ "Players" ],
-                
-                "parameters": [
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "username",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PaginationOutput"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/players/:id": {
-            "put": {
-                "summary": "Modificar um jogador",
-                "description": "Essa rota é responsável por atualizar um jogador no banco de dados.",
-                "tags": [ "Players" ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/PlayerUpdateInput"
-                            },
-                            "example": {
-                                "name": "Victor",
-                                "username": "lkt",
-                                "skills": {
-                                    "power": 6,
-                                    "speed": 5,
-                                    "dribble": 2
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PlayerCompleteOutput"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Jogador não encontrado",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorOutput"
-                                },
-                                "example": {
-                                    "message": "Jogador não encontrado"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Deletar um jogador",
-                "description": "Essa rota é responsável por deletar um jogador no banco de dados.",
-                "tags": [ "Players" ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorOutput"
-                                },
-                                "example": {
-                                    "message": "ok"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Jogador não encontrado",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorOutput"
-                                },
-                                "example": {
-                                    "message": "Jogador não encontrado"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "get": {
-                "summary": "Buscar jogador",
-                "description": "Essa rota é responsável por buscar um jogador no banco de dados.",
-                "tags": [ "Players" ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PlayerCompleteOutput"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Jogador não encontrado",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorOutput"
-                                },
-                                "example": {
-                                    "message": "Jogador não encontrado"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "components": {
-        "schemas": {
-            "PlayerCreateInput": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "skills": {
-                        "$ref": "#/components/schemas/SkillCreateInput"
-                    }
-                },
-                "required": [ "name", "skills" ]
-            },
-            "SkillCreateInput": {
-                "type": "object",
-                "properties": {
-                    "power": {
-                        "type": "number"
-                    },
-                    "speed": {
-                        "type": "number"
-                    },
-                    "dribble": {
-                        "type": "number",
-                        "nullable": true
-                    }
-                },
-                "required": [ "power", "speed" ]
-            },
-            "PlayerUpdateInput": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "skills": {
-                        "$ref": "#/components/schemas/SkillUpdateInput"
-                    }
-                }
-            },
-            "SkillUpdateInput": {
-                "type": "object",
-                "properties": {
-                    "power": {
-                        "type": "number"
-                    },
-                    "speed": {
-                        "type": "number"
-                    },
-                    "dribble": {
-                        "type": "number",
-                        "nullable": true
-                    }
-                }
-            },
-            "PlayerCompleteOutput": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "skills": {
-                        "$ref": "#/components/schemas/SkillCompleteOutput"
-                    }
-                }
-            },
-            "SkillCompleteOutput": {
-                "type": "object",
-                "properties": {
-                    "power": {
-                        "type": "number"
-                    },
-                    "speed": {
-                        "type": "number"
-                    },
-                    "dribble": {
-                        "type": "number",
-                        "nullable": true
-                    }
-                }
-            },
-            "PaginationOutput": {
-                "type": "object",
-                "properties": {
-                    "players": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/PlayerResumedOutput"
-                        }
-                    },
-                    "total": {
-                        "type": "number"
-                    },
-                    "next": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "prev": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                }
-            },
-            "PlayerResumedOutput": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "username": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "ErrorOutput": {
-                "type": "object",
-                "properties": {
-                    "message": {
-                        "type": "string"
-                    }
-                }
-            }
-        }
-    }
+	"openapi": "3.0.0",
+	"info": {
+		"title": "SpotMetrics football",
+		"description": "API de jogadores de football, nela você pode cadastrar, listar, atualizar, deletar jogadores, montar times e visualizar estatísticas.",
+		"contact": {
+			"name": "Victor Hugo",
+			"email": "victorhugods.pereira@gmail.com",
+			"url": "https://www.linkedin.com/in/victorhdsp/"
+		},
+		"version": "1.0.0"
+	},
+	"paths": {
+		"/v1/players/": {
+			"post": {
+				"summary": "Cadastrar jogador",
+				"description": "Essa rota é responsável por cadastrar um jogador no banco de dados.",
+				"tags": ["Players"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PlayerCreateInput"
+							},
+							"example": {
+								"name": "Victor",
+								"username": "lkt",
+								"skills": {
+									"power": 6,
+									"speed": 5,
+									"dribble": 2
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PlayerCompleteOutput"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Deve retornar que está faltando alguma informação no corpo da requisição",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorOutput"
+								},
+								"example": {
+									"message": "O nome do jogador é obrigatório"
+								}
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"summary": "Listar jogadores",
+				"description": "Essa rota é responsável por listar todos os jogadores cadastrados no banco de dados.",
+				"tags": ["Players"],
+
+				"parameters": [
+					{
+						"name": "limit",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"name": "page",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"name": "name",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "username",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PaginationOutput"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/players/:id": {
+			"put": {
+				"summary": "Modificar um jogador",
+				"description": "Essa rota é responsável por atualizar um jogador no banco de dados.",
+				"tags": ["Players"],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PlayerUpdateInput"
+							},
+							"example": {
+								"name": "Victor",
+								"username": "lkt",
+								"skills": {
+									"power": 6,
+									"speed": 5,
+									"dribble": 2
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PlayerCompleteOutput"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Jogador não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorOutput"
+								},
+								"example": {
+									"message": "Jogador não encontrado"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"summary": "Deletar um jogador",
+				"description": "Essa rota é responsável por deletar um jogador no banco de dados.",
+				"tags": ["Players"],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorOutput"
+								},
+								"example": {
+									"message": "ok"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Jogador não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorOutput"
+								},
+								"example": {
+									"message": "Jogador não encontrado"
+								}
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"summary": "Buscar jogador",
+				"description": "Essa rota é responsável por buscar um jogador no banco de dados.",
+				"tags": ["Players"],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PlayerCompleteOutput"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Jogador não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorOutput"
+								},
+								"example": {
+									"message": "Jogador não encontrado"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"PlayerCreateInput": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string",
+						"nullable": true
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					},
+					"skills": {
+						"$ref": "#/components/schemas/SkillCreateInput"
+					}
+				},
+				"required": ["name", "skills"]
+			},
+			"SkillCreateInput": {
+				"type": "object",
+				"properties": {
+					"power": {
+						"type": "number"
+					},
+					"speed": {
+						"type": "number"
+					},
+					"dribble": {
+						"type": "number",
+						"nullable": true
+					}
+				},
+				"required": ["power", "speed"]
+			},
+			"PlayerUpdateInput": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string",
+						"nullable": true
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					},
+					"skills": {
+						"$ref": "#/components/schemas/SkillUpdateInput"
+					}
+				}
+			},
+			"SkillUpdateInput": {
+				"type": "object",
+				"properties": {
+					"power": {
+						"type": "number"
+					},
+					"speed": {
+						"type": "number"
+					},
+					"dribble": {
+						"type": "number",
+						"nullable": true
+					}
+				}
+			},
+			"PlayerCompleteOutput": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string",
+						"nullable": true
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"skills": {
+						"$ref": "#/components/schemas/SkillCompleteOutput"
+					}
+				}
+			},
+			"SkillCompleteOutput": {
+				"type": "object",
+				"properties": {
+					"power": {
+						"type": "number"
+					},
+					"speed": {
+						"type": "number"
+					},
+					"dribble": {
+						"type": "number",
+						"nullable": true
+					}
+				}
+			},
+			"PaginationOutput": {
+				"type": "object",
+				"properties": {
+					"players": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/PlayerResumedOutput"
+						}
+					},
+					"total": {
+						"type": "number"
+					},
+					"next": {
+						"type": "string",
+						"nullable": true
+					},
+					"prev": {
+						"type": "string",
+						"nullable": true
+					}
+				}
+			},
+			"PlayerResumedOutput": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string",
+						"nullable": true
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"ErrorOutput": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
 }
