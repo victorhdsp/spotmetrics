@@ -51,8 +51,9 @@ async function createTeams(params: CreateTeamsParams): Promise<OutputCreateTeams
 	let index = 0;
 	params.size = params.size ? params.size : 5;
 	const players = await playerService.getRanking();
-	const { lower, higher, unusedPlayers } = randomPlayer(players, params.size);
+	const { lower:bLower, higher, unusedPlayers } = randomPlayer(players, params.size);
 	const higherPower = getTeamPower(higher);
+	let lower = bLower;
 
 	while (index < tradeCount) {
 		const lowerPower = getTeamPower(lower);
@@ -63,6 +64,7 @@ async function createTeams(params: CreateTeamsParams): Promise<OutputCreateTeams
 				unusedPlayers.shift();
 			lower[0] = unusedPlayers[0];
 			unusedPlayers.shift();
+			lower = orderTeamByPower(bLower)
 		} else {
 			const swap: PlayerComplete = lower[index];
 			lower[index] = higher[tradeCount - index];
