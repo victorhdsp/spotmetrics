@@ -1,5 +1,5 @@
+import type { AllPlayersParams } from "../../controllers/playerController/getAllPlayers";
 import playerModel from "../../model/playerModel";
-import type { AllPlayersParams } from "../../model/playerModel/getAllPlayers";
 import type { PlayerResumed } from "../../utils/types/player";
 
 type Output = Promise<{

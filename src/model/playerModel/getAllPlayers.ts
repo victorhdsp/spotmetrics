@@ -1,5 +1,6 @@
 import type { Prisma } from "@prisma/client";
 import prisma from "../../../prisma/database";
+import type { AllPlayersParams } from "../../controllers/playerController/getAllPlayers";
 
 type Output = Prisma.PrismaPromise<
 	{
@@ -9,13 +10,6 @@ type Output = Prisma.PrismaPromise<
 		createdAt: Date;
 	}[]
 >;
-
-export type AllPlayersParams = {
-	name?: string;
-	username?: string;
-	size?: number;
-	page: number;
-};
 
 function getAllPlayers(params: AllPlayersParams): Output {
 	const { name, username, size, page } = params;
