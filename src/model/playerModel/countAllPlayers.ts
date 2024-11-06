@@ -1,6 +1,6 @@
 import type { Prisma } from "@prisma/client";
 import prisma from "../../../prisma/database";
-import type { AllPlayersParams } from "./getAllPlayers";
+import type { AllPlayersParams } from "../../controllers/playerController/getAllPlayers";
 
 type Output = Prisma.PrismaPromise<number>;
 
