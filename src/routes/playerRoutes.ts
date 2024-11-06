@@ -21,7 +21,7 @@ routes.get(
 );
 
 routes.get(
-	"/createTeam",
+	"/teams",
 	asyncHandler(async (req: Request, res: Response) => {
 		const result = await playerController.createTeams(req);
 		res.status(200).json(result);
