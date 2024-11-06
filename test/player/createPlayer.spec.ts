@@ -46,7 +46,7 @@ describe("<post> na API de /players", () => {
 			},
 		};
 		const response = await api.post("/v1/players").send(data);
-		expect(response.status).toEqual(500);
+		expect(response.status).toEqual(400);
 		expect(response.body.message).toEqual("O nome do jogador é obrigatório");
 	});
 	test("faltando as habilidades, deve retornar uma mensagem de erro", async () => {
@@ -54,7 +54,7 @@ describe("<post> na API de /players", () => {
 			name: "fulano",
 		};
 		const response = await api.post("/v1/players").send(data);
-		expect(response.status).toEqual(500);
+		expect(response.status).toEqual(400);
 		expect(response.body.message).toEqual(
 			"Você precisa passar as habilidades do jogador",
 		);
@@ -67,7 +67,7 @@ describe("<post> na API de /players", () => {
 			},
 		};
 		const response = await api.post("/v1/players").send(data);
-		expect(response.status).toEqual(500);
+		expect(response.status).toEqual(400);
 		expect(response.body.message).toEqual("Força precisa ser um número");
 	});
 	test("faltando a força nas velocidade, deve retornar uma mensagem de erro", async () => {
@@ -78,7 +78,7 @@ describe("<post> na API de /players", () => {
 			},
 		};
 		const response = await api.post("/v1/players").send(data);
-		expect(response.status).toEqual(500);
+		expect(response.status).toEqual(400);
 		expect(response.body.message).toEqual("Velocidade precisa ser um número");
 	});
 	test("enviando informações mais, deve ignorar os dados extras e retornar um jogador", async () => {
@@ -111,7 +111,7 @@ describe("<post> na API de /players", () => {
 			extra: "extra",
 		};
 		const response = await api.post("/v1/players").send(data);
-		expect(response.status).toEqual(500);
+		expect(response.status).toEqual(400);
 		expect(response.body.message).toEqual("O nome do jogador é obrigatório");
 	});
 });

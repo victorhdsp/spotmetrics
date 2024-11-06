@@ -1,4 +1,5 @@
 import { type AnyZodObject, ZodError, type z } from "zod";
+import badRequestError from "../../errors/badRequest";
 
 export async function zParse<T extends AnyZodObject>(
 	schema: T,
@@ -9,8 +10,8 @@ export async function zParse<T extends AnyZodObject>(
 	} catch (error) {
 		if (error instanceof ZodError) {
 			const messages = error.issues.map((issue) => issue.message);
-			throw new Error(messages.join(", "));
+			throw new badRequestError(messages.join(", "));
 		}
-		throw new Error("Erro inesperado");
+		throw new badRequestError("Erro inesperado");
 	}
 }
