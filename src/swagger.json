@@ -45,7 +45,7 @@
 							}
 						}
 					},
-					"500": {
+					"400": {
 						"description": "Deve retornar que está faltando alguma informação no corpo da requisição",
 						"content": {
 							"application/json": {
@@ -277,6 +277,61 @@
 					}
 				}
 			}
+		},
+		"/v1/players/teams": {
+			"get": {
+				"summary": "Divide jogadores em times",
+				"description": "Essa rota é responsável por dividir os jogadores cadastrados no banco de dados em dois times.",
+				"tags": ["Players", "Team"],
+				"parameters": [
+					{
+						"name": "size",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "number"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TeamsOutput"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Não tem jogadores o suficiente.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorOutput"
+								},
+								"example": {
+									"message": "Não há jogadores suficientes para criar um time."
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Selecionou um time muito pequeno.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorOutput"
+								},
+								"example": {
+									"message": "O time não pode ser menor que 5 jogadores por time."
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"components": {
@@ -428,6 +483,23 @@
 					"createdAt": {
 						"type": "string",
 						"format": "date-time"
+					}
+				}
+			},
+			"TeamsOutput": {
+				"type": "object",
+				"properties": {
+					"team1": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/PlayerCompleteOutput"
+						}
+					},
+					"team2": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/PlayerCompleteOutput"
+						}
 					}
 				}
 			},
