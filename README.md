@@ -13,7 +13,8 @@ Certifique-se de ter o [Docker](https://www.docker.com/) e o [Docker Compose](ht
 1. **Clone o repositório**:
    ```bash
    git clone https://github.com/victorhdsp/spotmetrics.git
-   cd spotmetrics```
+   cd spotmetrics
+   ```
 
 2. **Execute o Docker Compose**:
     - docker-compose up
