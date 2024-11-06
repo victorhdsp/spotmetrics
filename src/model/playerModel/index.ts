@@ -13,6 +13,6 @@ const playerModel = {
 	get: getUniquePlayer,
 	getAll: getAllPlayers,
 	countAll: countAllPlayers,
-	getRanking: getRankingPlayers
+	getRanking: getRankingPlayers,
 };
 export default playerModel;

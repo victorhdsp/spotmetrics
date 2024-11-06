@@ -13,6 +13,6 @@ const playerService = {
 	get: getUniquePlayer,
 	getAll: getAllPlayers,
 	getRanking: getRankingPlayers,
-	createTeams: createTeams
+	createTeams: createTeams,
 };
 export default playerService;

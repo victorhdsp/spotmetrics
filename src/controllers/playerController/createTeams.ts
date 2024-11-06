@@ -14,12 +14,14 @@ export interface CreateTeamsParams {
 }
 
 const CreateTeamsSchema = z.object({
-	size: z.number().min(5, "O time não pode ser menor que 5 jogadores por time.")
-}) satisfies z.ZodType<CreateTeamsParams>
+	size: z
+		.number()
+		.min(5, "O time não pode ser menor que 5 jogadores por time."),
+}) satisfies z.ZodType<CreateTeamsParams>;
 
 async function createTeams(req: Request): Promise<OutputCreateTeams> {
 	const params: Required<CreateTeamsParams> = {
-		size: Number(`${req.query.limit || 5}`)
+		size: Number(`${req.query.limit || 5}`),
 	};
 	const resolvedParams = await zParse(CreateTeamsSchema, params);
 	const players = await playerService.createTeams(resolvedParams);

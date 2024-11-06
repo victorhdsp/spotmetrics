@@ -27,7 +27,7 @@ async function getAllPlayers(req: Request): Promise<OutputGetAllPlayers> {
 	const next = `/v1/players?limit=${params.size}&offset=${params.page + 1}`;
 	const prev = `/v1/players?limit=${params.size}&offset=${params.page - 1}`;
 	const size = params.size ? params.size : players.length;
-	
+
 	return {
 		players,
 		total,
