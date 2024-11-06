@@ -77,7 +77,7 @@ async function createTeams(
 			lower = orderTeamByPower(bLower);
 		} else {
 			const swap: PlayerComplete = lower[index];
-			lower[index] = higher[(higher.length - 1) - index];
+			lower[index] = higher[higher.length - 1 - index];
 			higher[index] = swap;
 			index++;
 		}
