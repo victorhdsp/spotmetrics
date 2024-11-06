@@ -16,5 +16,10 @@ Certifique-se de ter o [Docker](https://www.docker.com/) e o [Docker Compose](ht
    cd spotmetrics```
 
 2. **Execute o Docker Compose**:
-    - docker-compose up --build
-    - Acesse a aplicação: A API estará disponível em http://localhost:3000.
+    - docker-compose up
+
+3. **Rotas**:
+   - As rotas da aplicação se iniciam em:
+      - http://localhost:3000/v1/
+   - Sendo a documentação:
+      - http://localhost:3000/v1/docs
